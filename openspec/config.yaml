@@ -1,0 +1,28 @@
+schema: spec-driven
+
+context: |
+  PythonForge es la implementación Python de las convenciones compartidas por
+  DenoForge y GoForge. Será una librería modular para construir servicios, no
+  una aplicación de negocio. FastAPI es el framework HTTP principal y grpcio
+  proporciona un transporte gRPC de primera clase. Ambos transportes comparten
+  configuración, contexto de petición, seguridad, logging y OpenTelemetry.
+
+  El paquete se distribuirá desde PyPI con el nombre `pythonforge` y usará un
+  layout `src/`. La versión mínima objetivo es Python 3.12. Las integraciones
+  cloud y las herramientas de desarrollo se instalarán mediante extras para
+  mantener liviana la instalación base.
+
+rules:
+  proposal:
+    - Explicar cualquier diferencia funcional respecto de DenoForge y GoForge.
+    - Identificar dependencias nuevas y si pertenecen al núcleo o a un extra.
+  design:
+    - Mantener desacoplada la lógica de dominio de FastAPI y grpcio.
+    - Definir apagado ordenado, cancelación, timeouts y propagación de contexto.
+    - No registrar secretos, tokens, cookies, credenciales ni cuerpos por defecto.
+  specs:
+    - Usar requisitos normativos y escenarios observables.
+    - Incluir criterios para HTTP y gRPC cuando una capacidad afecte transportes.
+  tasks:
+    - Ejecutar instalaciones únicamente dentro de `.venv`.
+    - Incluir pruebas, tipado, lint, seguridad, documentación y empaquetado.

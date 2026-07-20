@@ -1,0 +1,10 @@
+**/.vscode
+**/logs
+**/coverage.html
+**/.gocache
+**/.idea
+**/.codex
+**/.claude
+**/CLAUDE.md
+**/AGENTS.md
+push.txt
