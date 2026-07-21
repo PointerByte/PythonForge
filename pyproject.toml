@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pythonforge"
+version = "0.1.0"
+description = "A modular Python library for building modern services with FastAPI and gRPC."
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "Apache-2.0"}
+dependencies = [
+    "fastapi",
+    "pydantic-settings",
+    "httpx",
+    "PyYAML",
+]
+
+[project.optional-dependencies]
+grpc = [
+    "grpcio",
+    "protobuf",
+]
+telemetry = [
+    "opentelemetry-api",
+    "opentelemetry-sdk",
+    "opentelemetry-instrumentation-fastapi",
+    "opentelemetry-instrumentation-httpx",
+    "opentelemetry-instrumentation-grpc",
+]
+aws = [
+    "boto3",
+]
+azure = [
+    "azure-identity",
+    "azure-keyvault-keys",
+]
+gcp = [
+    "google-cloud-kms",
+]
+cli = [
+    "typer",
+]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "grpcio-tools",
+    "ruff",
+    "mypy",
+    "bandit",
+    "pip-audit",
+    "build",
+    "twine",
+]
+
+[project.scripts]
+qpython = "pythonforge.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pythonforge"]

@@ -7,6 +7,20 @@ servicios modernos. FastAPI será el framework principal y gRPC será un transpo
 de primera clase compatible: ambos compartirán configuración, seguridad,
 observabilidad, contexto de petición y ciclo de vida.
 
+## Proyectos de referencia
+
+Antes de implementar cada módulo, revisar su capacidad equivalente en los
+repositorios locales hermanos:
+
+- DenoForge: `../DenoForge`
+- GoForge: `../GoForge`
+
+Las rutas son relativas a la raíz de `PythonForge`. DenoForge sirve como
+referencia de modularidad, APIs asíncronas y dependencias opcionales; GoForge,
+como referencia de configuración, bootstrapping, observabilidad, seguridad y
+herramientas de servicio. PythonForge debe conservar la intención funcional sin
+copiar interfaces que no sean idiomáticas en Python.
+
 ## Principios obligatorios
 
 - Usar Python 3.12 o superior y APIs asíncronas para I/O.
@@ -62,7 +76,29 @@ Antes de fijar versiones, comprobar compatibilidad con Python 3.12+, FastAPI,
 Pydantic v2, `grpc.aio` y la versión de protobuf elegida. Declarar rangos directos
 en `pyproject.toml`; mantener un lock reproducible separado para desarrollo/CI.
 
-## Fases
+
+## Tareas detalladas: Fase 1 (Fundación)
+1. Crear `.gitignore` con exclusiones estándar (`.venv/`, `dist/`, `build/`, `*.egg-info`, `.pytest_cache`, `.mypy_cache`, `__pycache__/`).
+2. Crear `pyproject.toml` definiendo:
+   - Backend: `hatchling` o `setuptools`.
+   - Metadata: Nombre `pythonforge`, versión `0.1.0`, descripción, licencia Apache-2.0.
+   - Dependencias de núcleo: `fastapi`, `pydantic-settings`, `httpx`, `PyYAML`.
+   - Extras: `grpc`, `telemetry`, `aws`, `azure`, `gcp`, `cli`, `dev`.
+3. Crear estructura de directorios:
+   - `src/pythonforge/`
+   - `tests/`
+   - `examples/`
+   - `docs/`
+   - `protos/`
+4. Crear `README.md` básico y `LICENSE`.
+5. Crear un script de `smoke_test.py` que verifique la instalación del wheel.
+6. Ejecutar `python -m build` y validar artefactos.
+
+## Tareas detalladas: Fase 2 (Configuración y Contexto)
+1. Crear `src/pythonforge/config/` con modelos Pydantic para cada componente.
+2. Crear `src/pythonforge/context.py` con el objeto `RequestContext` y `contextvars`.
+3. Implementar el cargador de configuración con precedencia (Defaults -> YAML -> Env -> Overrides).
+4. Definir el esquema de `TraceContext` compatible con W3C.
 
 ### 1. Fundación y empaquetado
 

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "lmstudio/gemma-4-12b-200k",
+  "small_model": "lmstudio/gemma-4-12b-200k",
+  "enabled_providers": [
+    "lmstudio"
+  ],
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio local",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1",
+        "timeout": false,
+        "chunkTimeout": 120000
+      },
+      "models": {
+        "gemma-4-12b-200k": {
+          "id": "gemma-4-12b-200k",
+          "name": "Gemma 4 12B QAT 200K",
+          "family": "gemma",
+          "reasoning": true,
+          "temperature": true,
+          "tool_call": true,
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        }
+      }
+    }
+  },
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 16384
+  },
+  "watcher": {
+    "ignore": [
+      ".git/**",
+      "node_modules/**",
+      "vendor/**",
+      "dist/**",
+      "build/**",
+      "coverage/**",
+      ".cache/**",
+      "tmp/**",
+      "**/logs",
+      "**/.gocache",
+      "**/venv",
+      "**/__pycache__",
+      "**/.pytest_cache",
+      "**/.mypy_cache",
+      "**/.DS_Store",
+      "**/.idea"
+    ]
+  }
+}
