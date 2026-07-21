@@ -18,3 +18,5 @@ __pycache__/
 .cache/
 push.txt
 plane.md
+AGENTS.md
+CLAUDE.md
