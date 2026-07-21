@@ -17,6 +17,6 @@ __pycache__/
 .coverage_old
 .cache/
 push.txt
-plane.md
+plan.md
 AGENTS.md
 CLAUDE.md
