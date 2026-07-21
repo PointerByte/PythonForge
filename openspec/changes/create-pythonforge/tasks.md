@@ -53,7 +53,7 @@
 
 ## 8. Documentación y distribución
 
-- [ ] 8.1 Escribir README en español e inglés, referencia de configuración y ejemplos.
+- [x] 8.1 Escribir README en español e inglés, referencia de configuración y ejemplos. (docs/configuration, docs/http y docs/observability cubren lo implementado hasta la fase 3; falta documentar gRPC, seguridad/cripto y jobs/CLI cuando se implementen)
 - [ ] 8.2 Alcanzar >=85 % de cobertura y aprobar lint, tipado y análisis de seguridad.
 - [ ] 8.3 Construir wheel/sdist y probar el wheel en una `.venv` limpia.
 - [ ] 8.4 Configurar CI y publicación PyPI con Trusted Publishing.
