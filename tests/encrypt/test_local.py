@@ -23,7 +23,6 @@ from pythonforge.encrypt.local import (
 )
 from pythonforge.errors import CryptographyError
 
-
 # --- AES-GCM -----------------------------------------------------------
 
 
@@ -182,7 +181,9 @@ def test_ecdh_different_peers_derive_different_secrets() -> None:
 def test_ecdh_info_changes_the_derived_key() -> None:
     alice, bob = generate_ec_key(), generate_ec_key()
     peer = bob.public_only()
-    assert ecdh_shared_key(alice, peer, info=b"ctx-a") != ecdh_shared_key(alice, peer, info=b"ctx-b")
+    assert ecdh_shared_key(alice, peer, info=b"ctx-a") != ecdh_shared_key(
+        alice, peer, info=b"ctx-b"
+    )
 
 
 # --- KeyData -----------------------------------------------------------

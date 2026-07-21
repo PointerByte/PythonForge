@@ -8,7 +8,6 @@ import pytest
 from pythonforge.errors import ConfigurationError
 from pythonforge.tools import CronSchedule, JobScheduler, JobState
 
-
 # --- CronSchedule ------------------------------------------------------
 
 

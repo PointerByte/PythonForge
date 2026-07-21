@@ -14,7 +14,7 @@ import logging
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 from ..errors import ConfigurationError
@@ -25,7 +25,7 @@ logger = get_logger("pythonforge.jobs")
 JobCallable = Callable[[], Awaitable[None] | None]
 
 
-class JobState(str, Enum):
+class JobState(StrEnum):
     STOPPED = "stopped"
     RUNNING = "running"
     PAUSED = "paused"
@@ -53,7 +53,8 @@ class CronSchedule:
         parts = expression.split()
         if len(parts) != 5:
             raise ConfigurationError(
-                f"cron expression must have 5 fields (minute hour day month weekday): {expression!r}"
+                "cron expression must have 5 fields "
+                f"(minute hour day month weekday): {expression!r}"
             )
         self.expression = expression
         bounds = ((0, 59), (0, 23), (1, 31), (1, 12), (0, 6))

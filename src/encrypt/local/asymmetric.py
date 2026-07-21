@@ -115,9 +115,7 @@ def rsa_sign(key: KeyData, data: bytes) -> bytes:
         return bytes(
             _load_private(key).sign(
                 data,
-                padding.PSS(
-                    mgf=padding.MGF1(hashes.SHA256()), salt_length=padding.PSS.MAX_LENGTH
-                ),
+                padding.PSS(mgf=padding.MGF1(hashes.SHA256()), salt_length=padding.PSS.MAX_LENGTH),
                 hashes.SHA256(),
             )
         )

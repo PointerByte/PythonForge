@@ -186,9 +186,7 @@ async def test_stop_is_safe_when_never_started() -> None:
     await WorkerPool(handler).stop()
 
 
-@pytest.mark.parametrize(
-    ("concurrency", "max_queue_size"), [(0, 10), (-1, 10), (1, 0), (1, -5)]
-)
+@pytest.mark.parametrize(("concurrency", "max_queue_size"), [(0, 10), (-1, 10), (1, 0), (1, -5)])
 def test_invalid_configuration_is_rejected(concurrency: int, max_queue_size: int) -> None:
     async def handler(item: int) -> None:
         return None

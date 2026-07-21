@@ -5,7 +5,6 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, SecretStr, model_validator
 
-
 SYMMETRIC_ALGORITHMS = ("HS256",)
 ASYMMETRIC_ALGORITHMS = ("RS256", "PS256", "EdDSA")
 

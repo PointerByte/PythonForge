@@ -22,39 +22,39 @@
 
 ## 4. gRPC
 
-- [ ] 4.1 Definir protos de ejemplo/health y generación reproducible de stubs.
-- [ ] 4.2 Implementar servidor y cliente `grpc.aio`, TLS/mTLS y graceful shutdown.
-- [ ] 4.3 Agregar interceptores unary/stream para contexto, JWT, logging y tracing.
-- [ ] 4.4 Probar llamadas unary, client/server/bidi streaming, metadata, deadlines y cancelación.
-- [ ] 4.5 Implementar y probar el runtime híbrido FastAPI + gRPC.
+- [x] 4.1 Definir protos de ejemplo/health y generación reproducible de stubs.
+- [x] 4.2 Implementar servidor y cliente `grpc.aio`, TLS/mTLS y graceful shutdown.
+- [x] 4.3 Agregar interceptores unary/stream para contexto, JWT, logging y tracing.
+- [x] 4.4 Probar llamadas unary, client/server/bidi streaming, metadata, deadlines y cancelación.
+- [x] 4.5 Implementar y probar el runtime híbrido FastAPI + gRPC.
 
 ## 5. Observabilidad
 
 - [x] 5.1 Implementar niveles, formatos JSON/texto, sinks y rotación.
 - [x] 5.2 Implementar sanitización de headers, atributos y estructuras anidadas.
-- [ ] 5.3 Integrar OpenTelemetry para FastAPI, HTTPX y gRPC, con exportadores opcionales. (FastAPI y HTTPX listos; gRPC pendiente de la fase 4)
-- [ ] 5.4 Verificar paridad del esquema de logs entre HTTP y gRPC. (pendiente de la fase 4)
+- [x] 5.3 Integrar OpenTelemetry para FastAPI, HTTPX y gRPC, con exportadores opcionales.
+- [x] 5.4 Verificar paridad del esquema de logs entre HTTP y gRPC. (`tests/contracts/test_transport_parity.py`)
 
 ## 6. Seguridad y criptografía
 
-- [ ] 6.1 Implementar JWT HS256, RS256, PS256 y EdDSA con validadores y claims tipados.
-- [ ] 6.2 Agregar bearer/cookie para FastAPI e interceptores bearer para gRPC.
-- [ ] 6.3 Agregar headers HTTP de seguridad y defaults fail-closed.
-- [ ] 6.4 Implementar AES-GCM, HMAC/SHA-256/BLAKE3, RSA-OAEP, ECDH y firmas.
-- [ ] 6.5 Implementar protocolos KMS y adaptadores opcionales AWS, Azure y GCP.
-- [ ] 6.6 Probar round-trips, inputs inválidos y KMS mediante dobles inyectados.
+- [x] 6.1 Implementar JWT HS256, RS256, PS256 y EdDSA con validadores y claims tipados.
+- [x] 6.2 Agregar bearer/cookie para FastAPI e interceptores bearer para gRPC.
+- [x] 6.3 Agregar headers HTTP de seguridad y defaults fail-closed.
+- [x] 6.4 Implementar AES-GCM, HMAC/SHA-256/BLAKE3, RSA-OAEP, ECDH y firmas.
+- [x] 6.5 Implementar protocolos KMS y adaptadores opcionales AWS, Azure y GCP.
+- [x] 6.6 Probar round-trips, inputs inválidos y KMS mediante dobles inyectados.
 
 ## 7. Jobs, workers y CLI
 
-- [ ] 7.1 Implementar jobs interval/cron con pause, resume, stop y modo test.
-- [ ] 7.2 Implementar cola de workers acotada con backpressure y apagado ordenado.
-- [ ] 7.3 Crear `qpython new fastapi|grpc|hybrid` con YAML por defecto.
-- [ ] 7.4 Crear utilidad de claves/certificados y ejemplos ejecutables.
+- [x] 7.1 Implementar jobs interval/cron con pause, resume, stop y modo test.
+- [x] 7.2 Implementar cola de workers acotada con backpressure y apagado ordenado.
+- [x] 7.3 Crear `qpython new fastapi|grpc|hybrid` con YAML por defecto.
+- [x] 7.4 Crear utilidad de claves/certificados y ejemplos ejecutables.
 
 ## 8. Documentación y distribución
 
-- [x] 8.1 Escribir README en español e inglés, referencia de configuración y ejemplos. (docs/configuration, docs/http y docs/observability cubren lo implementado hasta la fase 3; falta documentar gRPC, seguridad/cripto y jobs/CLI cuando se implementen)
-- [ ] 8.2 Alcanzar >=85 % de cobertura y aprobar lint, tipado y análisis de seguridad.
-- [ ] 8.3 Construir wheel/sdist y probar el wheel en una `.venv` limpia.
-- [ ] 8.4 Configurar CI y publicación PyPI con Trusted Publishing.
+- [x] 8.1 Escribir README en español e inglés, referencia de configuración y ejemplos. (docs/{configuration,http,grpc,security,background-work,observability} en `.md` y `.es.md`)
+- [x] 8.2 Alcanzar >=85 % de cobertura y aprobar lint, tipado y análisis de seguridad. (260 tests, 88.77 % de cobertura; ruff/mypy/bandit/pip-audit en verde)
+- [x] 8.3 Construir wheel/sdist y probar el wheel en una `.venv` limpia. (twine check OK; verificado que la instalación base no arrastra grpcio/boto3/azure/gcp/otel/cryptography/typer)
+- [x] 8.4 Configurar CI y publicación PyPI con Trusted Publishing. (`.github/workflows/{ci,publish}.yml`; publish es manual por workflow_dispatch. OJO: `.github/` está en .gitignore, hay que quitarlo para que CI exista en el repo)
 - [ ] 8.5 Ejecutar el checklist de `push.txt`, etiquetar y publicar `0.1.0`.

@@ -26,7 +26,13 @@ class KeyData:
     secret: bytes | None = field(default=None, repr=False)
 
     def __repr__(self) -> str:
-        held = "secret+public" if self.secret and self.public else "secret" if self.secret else "public"
+        held = (
+            "secret+public"
+            if self.secret and self.public
+            else "secret"
+            if self.secret
+            else "public"
+        )
         return (
             f"KeyData(kind={self.kind!r}, provider={self.provider!r}, "
             f"reference={self.reference!r}, material={held})"

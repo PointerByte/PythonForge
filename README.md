@@ -8,9 +8,7 @@ it does not hide or wrap the normal FastAPI/Starlette/HTTPX APIs.
 
 *Lee esto en español: [README.es.md](README.es.md)*
 
-## Project status
-
-PythonForge is under active development. Implemented so far:
+## What's included
 
 - **Configuration** (`pythonforge.config`) — typed settings via
   `pydantic-settings`, with YAML/JSON discovery, `.env` files, and
@@ -19,14 +17,23 @@ PythonForge is under active development. Implemented so far:
   `RequestContext` backed by `contextvars`, with W3C Trace Context support.
 - **HTTP transport** (`pythonforge.transport.http`) — a FastAPI app factory,
   middleware stack, health/readiness endpoints, and an async HTTPX client.
+- **gRPC transport** (`pythonforge.transport.grpc`) — `grpc.aio` server and
+  channels, interceptors for context/logging/errors/auth, all four RPC
+  patterns, TLS/mTLS and the standard health service.
+- **Hybrid runtime** (`pythonforge.transport.ServiceRuntime`) — FastAPI and
+  gRPC in one process, with atomic startup and drained shutdown.
+- **Security** (`pythonforge.security`) — JWT (HS256/RS256/PS256/EdDSA),
+  bearer/cookie auth for FastAPI and bearer metadata for gRPC.
+- **Cryptography** (`pythonforge.encrypt`) — AES-GCM, HMAC/SHA-256/BLAKE3,
+  RSA-OAEP, ECDH, Ed25519, plus injectable AWS/Azure/GCP KMS adapters.
+- **Background work** (`pythonforge.tools`) — interval/cron jobs and a
+  bounded worker pool with real backpressure.
+- **CLI** (`qpython`) — scaffolds FastAPI, gRPC or hybrid services and
+  generates development certificates.
 - **Logging** (`pythonforge.logger`) — structured JSON/text logs with
   automatic secret redaction.
 - **Telemetry** (`pythonforge.telemetry`) — optional OpenTelemetry
-  integration for FastAPI and HTTPX.
-
-Not implemented yet: gRPC transport, JWT/cryptography, KMS providers,
-background jobs/workers, and the `qpython` scaffolding CLI. See
-`openspec/changes/create-pythonforge/tasks.md` for the full backlog.
+  integration for FastAPI, HTTPX and gRPC.
 
 ## Installation
 
@@ -42,10 +49,12 @@ The base install only pulls in `fastapi`, `pydantic-settings`, `httpx`,
 
 | Extra | Adds |
 | --- | --- |
+| `grpc` | `grpcio`, `grpcio-health-checking`, `protobuf` |
+| `security` | `PyJWT[crypto]`, `cryptography`, `blake3` |
 | `telemetry` | OpenTelemetry SDK + FastAPI/HTTPX/gRPC instrumentation |
-| `grpc` | `grpcio`, `protobuf` (transport not implemented yet) |
-| `aws` / `azure` / `gcp` | One KMS provider SDK each (not implemented yet) |
-| `cli` | `typer` (scaffolding CLI not implemented yet) |
+| `aws` / `azure` / `gcp` | One KMS provider SDK each |
+| `cli` | `typer` (the `qpython` scaffolding CLI) |
+| `all` | Every runtime capability above, excluding `dev` |
 | `dev` | pytest, coverage, mypy, ruff, bandit, pip-audit, build, twine, uvicorn |
 
 ## Quick start
@@ -71,12 +80,25 @@ Run it with any ASGI server, e.g. `uvicorn myapp:app`. See
 `examples/fastapi_service/` for a complete runnable example, including how
 `ServerHTTPConfig`'s TLS fields map onto uvicorn's `ssl_*` options.
 
+Or scaffold a whole service:
+
+```bash
+pip install "pythonforge[cli,grpc]"
+qpython new hybrid my-service   # FastAPI + gRPC in one process
+```
+
 ## Documentation
 
 - [docs/configuration.md](docs/configuration.md) — settings model, source
   precedence, file discovery, environment variables, secrets.
 - [docs/http.md](docs/http.md) — `create_app`, middleware, health/readiness,
   error handling, `ForgeClient`.
+- [docs/grpc.md](docs/grpc.md) — gRPC server/client, interceptors, stub
+  generation, and the hybrid `ServiceRuntime`.
+- [docs/security.md](docs/security.md) — JWT, authentication on both
+  transports, local cryptography, and KMS providers.
+- [docs/background-work.md](docs/background-work.md) — jobs, workers, and
+  the `qpython` CLI.
 - [docs/observability.md](docs/observability.md) — log schema, redaction,
   and OpenTelemetry integration.
 

@@ -13,15 +13,14 @@ import contextlib
 import logging
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
-from typing import Any, Generic, TypeVar
+from typing import Any
 
 from ..errors import ConfigurationError, LifecycleError
 from ..logger import get_logger, log_event
 
 logger = get_logger("pythonforge.workers")
 
-T = TypeVar("T")
-Handler = Callable[[T], Awaitable[None]]
+type Handler[T] = Callable[[T], Awaitable[None]]
 
 
 @dataclass
@@ -31,7 +30,7 @@ class WorkerStats:
     rejected: int = 0
 
 
-class WorkerPool(Generic[T]):
+class WorkerPool[T]:
     """Runs ``concurrency`` workers over a bounded queue of items."""
 
     def __init__(

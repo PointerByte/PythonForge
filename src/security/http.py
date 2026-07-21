@@ -6,7 +6,7 @@ identity through the same API in HTTP and gRPC handlers alike.
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+from collections.abc import Awaitable, Callable, Sequence
 
 from fastapi import Request
 
@@ -33,7 +33,7 @@ def require_auth(
     *,
     scopes: Sequence[str] = (),
     cookie_name: str | None = None,
-) -> Callable[[Request], Claims]:
+) -> Callable[[Request], Awaitable[Claims]]:
     """Build a FastAPI dependency enforcing a valid token and optional scopes.
 
     Usage::
@@ -72,7 +72,7 @@ def require_auth(
 
 def optional_auth(
     config: JWTConfig, *, cookie_name: str | None = None
-) -> Callable[[Request], Claims | None]:
+) -> Callable[[Request], Awaitable[Claims | None]]:
     """Like :func:`require_auth`, but anonymous requests are allowed through.
 
     An invalid token is still rejected -- "optional" means "may be absent",

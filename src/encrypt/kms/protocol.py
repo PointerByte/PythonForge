@@ -55,14 +55,14 @@ class InMemoryKMS:
             raise ProviderError(f"unknown key reference: {reference}") from exc
 
     async def encrypt(self, key_reference: str, plaintext: bytes) -> bytes:
-        from ..local.symmetric import encrypt
         from ..keys import KeyData
+        from ..local.symmetric import encrypt
 
         return encrypt(KeyData(kind="symmetric", secret=self._key(key_reference)), plaintext)
 
     async def decrypt(self, key_reference: str, ciphertext: bytes) -> bytes:
-        from ..local.symmetric import decrypt
         from ..keys import KeyData
+        from ..local.symmetric import decrypt
 
         return decrypt(KeyData(kind="symmetric", secret=self._key(key_reference)), ciphertext)
 

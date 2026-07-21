@@ -76,7 +76,9 @@ def test_tampered_signature_is_rejected() -> None:
 
 def test_token_signed_with_another_secret_is_rejected() -> None:
     token = encode_token(hs256_config(), Claims(sub="u"))
-    other = JWTConfig(enabled=True, algorithm="HS256", secret_key="a-completely-different-secret!!!")
+    other = JWTConfig(
+        enabled=True, algorithm="HS256", secret_key="a-completely-different-secret!!!"
+    )
     with pytest.raises(AuthenticationError):
         decode_token(other, token)
 

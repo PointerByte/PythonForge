@@ -26,7 +26,11 @@ class AWSKMSProvider:
 
     def __init__(self, client: Any | None = None, *, region_name: str | None = None) -> None:
         """``client`` accepts a preconfigured (or fake) boto3 KMS client."""
-        self._client = client if client is not None else _require_boto3().client("kms", region_name=region_name)
+        self._client = (
+            client
+            if client is not None
+            else _require_boto3().client("kms", region_name=region_name)
+        )
 
     async def _call(self, operation: str, **kwargs: Any) -> dict[str, Any]:
         try:
