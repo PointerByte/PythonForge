@@ -2,23 +2,23 @@
 
 ## 1. Fundación
 
-- [ ] 1.1 Crear `pyproject.toml`, layout `src/`, metadata Apache-2.0 y API raíz.
-- [ ] 1.2 Declarar Python >=3.12, dependencias base y extras sin duplicidades.
-- [ ] 1.3 Ignorar `.venv`, artefactos de build y caches; crear `.venv` antes de instalar cualquier dependencia y documentar su activación.
-- [ ] 1.4 Configurar Ruff, mypy, pytest, cobertura, Bandit y pip-audit.
+- [x] 1.1 Crear `pyproject.toml`, layout `src/`, metadata Apache-2.0 y API raíz.
+- [x] 1.2 Declarar Python >=3.12, dependencias base y extras sin duplicidades.
+- [x] 1.3 Ignorar `.venv`, artefactos de build y caches; crear `.venv` antes de instalar cualquier dependencia y documentar su activación.
+- [x] 1.4 Configurar Ruff, mypy, pytest, cobertura, Bandit y pip-audit.
 
 ## 2. Configuración y contexto
 
-- [ ] 2.1 Implementar settings tipados y precedencia YAML/JSON, env files, entorno y overrides.
-- [ ] 2.2 Implementar `RequestContext` con `contextvars`, request ID y W3C Trace Context.
-- [ ] 2.3 Probar validación, secretos, precedencia y aislamiento concurrente.
+- [x] 2.1 Implementar settings tipados y precedencia YAML/JSON, env files, entorno y overrides.
+- [x] 2.2 Implementar `RequestContext` con `contextvars`, request ID y W3C Trace Context.
+- [x] 2.3 Probar validación, secretos, precedencia y aislamiento concurrente.
 
 ## 3. FastAPI
 
-- [ ] 3.1 Implementar `create_app` con lifespan, health configurable y apagado ordenado.
-- [ ] 3.2 Agregar middleware de contexto, errores, seguridad, logging, rate limit y CORS.
-- [ ] 3.3 Implementar cliente HTTPX async con timeouts, TLS/mTLS y trazas.
-- [ ] 3.4 Crear ejemplo y pruebas de integración HTTP.
+- [x] 3.1 Implementar `create_app` con lifespan, health configurable y apagado ordenado.
+- [x] 3.2 Agregar middleware de contexto, errores, seguridad, logging, rate limit y CORS.
+- [x] 3.3 Implementar cliente HTTPX async con timeouts, TLS/mTLS y trazas.
+- [x] 3.4 Crear ejemplo y pruebas de integración HTTP.
 
 ## 4. gRPC
 
@@ -30,10 +30,10 @@
 
 ## 5. Observabilidad
 
-- [ ] 5.1 Implementar niveles, formatos JSON/texto, sinks y rotación.
-- [ ] 5.2 Implementar sanitización de headers, atributos y estructuras anidadas.
-- [ ] 5.3 Integrar OpenTelemetry para FastAPI, HTTPX y gRPC, con exportadores opcionales.
-- [ ] 5.4 Verificar paridad del esquema de logs entre HTTP y gRPC.
+- [x] 5.1 Implementar niveles, formatos JSON/texto, sinks y rotación.
+- [x] 5.2 Implementar sanitización de headers, atributos y estructuras anidadas.
+- [ ] 5.3 Integrar OpenTelemetry para FastAPI, HTTPX y gRPC, con exportadores opcionales. (FastAPI y HTTPX listos; gRPC pendiente de la fase 4)
+- [ ] 5.4 Verificar paridad del esquema de logs entre HTTP y gRPC. (pendiente de la fase 4)
 
 ## 6. Seguridad y criptografía
 

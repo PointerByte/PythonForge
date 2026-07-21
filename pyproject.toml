@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pythonforge"
-version = "0.1.0"
+version = "0.0.1"
 description = "A modular Python library for building modern services with FastAPI and gRPC."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -14,6 +14,7 @@ dependencies = [
     "pydantic-settings",
     "httpx",
     "PyYAML",
+    "python-dotenv",
 ]
 
 [project.optional-dependencies]
@@ -48,10 +49,12 @@ dev = [
     "grpcio-tools",
     "ruff",
     "mypy",
+    "types-PyYAML",
     "bandit",
     "pip-audit",
     "build",
     "twine",
+    "uvicorn[standard]",
 ]
 
 [project.scripts]
@@ -59,3 +62,61 @@ qpython = "pythonforge.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pythonforge"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC", "S", "C4"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S106"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pythonforge"]
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
+python_version = "3.12"
+mypy_path = "src"
+explicit_package_bases = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = "opentelemetry.exporter.otlp.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = [
+    "ignore:Using .httpx. with .starlette.testclient. is deprecated",
+]
+
+[tool.coverage.run]
+source = ["src/pythonforge"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
