@@ -34,6 +34,7 @@ class TelemetryProvider(Protocol):
 
     def instrument_fastapi(self, app: Any) -> None: ...
     def instrument_httpx(self) -> None: ...
+    def instrument_grpc(self) -> None: ...
     def shutdown(self) -> None: ...
 
 
@@ -63,6 +64,9 @@ class NoOpTelemetryProvider:
     def instrument_httpx(self) -> None:
         return None
 
+    def instrument_grpc(self) -> None:
+        return None
+
     def shutdown(self) -> None:
         return None
 
@@ -83,6 +87,18 @@ class _OTelTelemetryProvider:
         from opentelemetry.instrumentation.httpx import HTTPXClientInstrumentor
 
         HTTPXClientInstrumentor().instrument()
+
+    def instrument_grpc(self) -> None:
+        # Instruments both the aio server and aio client sides. Only useful
+        # when the `grpc` extra is also installed; harmless otherwise, since
+        # the instrumentation package simply has nothing to patch.
+        from opentelemetry.instrumentation.grpc import (
+            GrpcAioInstrumentorClient,
+            GrpcAioInstrumentorServer,
+        )
+
+        GrpcAioInstrumentorServer().instrument()
+        GrpcAioInstrumentorClient().instrument()
 
     def shutdown(self) -> None:
         self._provider.shutdown()

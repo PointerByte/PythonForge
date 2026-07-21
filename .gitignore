@@ -16,6 +16,7 @@ __pycache__/
 .coverage
 .coverage_old
 .cache/
+.typing/
 push.txt
 plan.md
 temp.md

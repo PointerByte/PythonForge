@@ -87,7 +87,7 @@ Spanish translations are available alongside each file (`*.es.md`).
 ```bash
 python -m ruff format --check .
 python -m ruff check .
-python -m mypy src tests
+python -m mypy .typing/pythonforge tests
 python -m pytest --cov=pythonforge --cov-report=term-missing --cov-fail-under=85
 python -m bandit -q -r src
 python -m pip_audit

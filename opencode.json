@@ -62,7 +62,8 @@
       "**/.pytest_cache",
       "**/.mypy_cache",
       "**/.DS_Store",
-      "**/.idea"
+      "**/.idea",
+      ".typing"
     ]
   }
 }

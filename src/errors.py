@@ -30,6 +30,22 @@ class AuthorizationError(PythonForgeError):
     """A caller was identified but is not allowed to perform the operation."""
 
 
+class CryptographyError(PythonForgeError):
+    """A cryptographic operation failed (bad key, bad ciphertext, bad signature).
+
+    Deliberately coarse: distinguishing *why* a decryption or signature check
+    failed is exactly the kind of detail that enables oracle attacks.
+    """
+
+
+class ProviderError(PythonForgeError):
+    """An external provider (KMS, secret store) failed or refused a request."""
+
+
+class LifecycleError(PythonForgeError):
+    """A component failed to start, or could not shut down cleanly."""
+
+
 class MissingExtraError(PythonForgeError):
     """An optional capability was invoked without its extra installed."""
 

@@ -6,7 +6,8 @@ from pydantic import BaseModel, Field, model_validator
 class ServerHTTPConfig(BaseModel):
     # Must be reachable outside its container by default.
     host: str = Field(default="0.0.0.0")  # noqa: S104  # nosec B104
-    port: int = Field(default=8000, ge=1, le=65535)
+    # 0 means "let the OS pick an ephemeral port" (used by integration tests).
+    port: int = Field(default=8000, ge=0, le=65535)
     workers: int = Field(default=1, ge=1)
     keep_alive: bool = Field(default=True)
 
@@ -39,7 +40,8 @@ class ServerHTTPConfig(BaseModel):
 class ServerGRPCConfig(BaseModel):
     # Must be reachable outside its container by default.
     host: str = Field(default="0.0.0.0")  # noqa: S104  # nosec B104
-    port: int = Field(default=50051, ge=1, le=65535)
+    # 0 means "let the OS pick an ephemeral port" (used by integration tests).
+    port: int = Field(default=50051, ge=0, le=65535)
     max_workers: int = Field(default=10, ge=1)
     max_message_length: int = Field(default=4 * 1024 * 1024, ge=1)
 

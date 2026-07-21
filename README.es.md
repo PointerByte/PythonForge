@@ -93,7 +93,7 @@ Las versiones en inglés están disponibles junto a cada archivo (sin sufijo
 ```bash
 python -m ruff format --check .
 python -m ruff check .
-python -m mypy src tests
+python -m mypy .typing/pythonforge tests
 python -m pytest --cov=pythonforge --cov-report=term-missing --cov-fail-under=85
 python -m bandit -q -r src
 python -m pip_audit

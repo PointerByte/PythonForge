@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+// Example service used by PythonForge's own integration tests and by the
+// `qpython new grpc` scaffold. It intentionally covers all four RPC
+// patterns so the interceptor chain is exercised end to end.
+package pythonforge.example.v1;
+
+message EchoRequest {
+  string message = 1;
+}
+
+message EchoResponse {
+  string message = 1;
+  // Echoed back from the shared RequestContext so tests can assert that
+  // transport metadata was translated into the same context HTTP uses.
+  string request_id = 2;
+  string trace_id = 3;
+}
+
+message SumRequest {
+  int32 value = 1;
+}
+
+message SumResponse {
+  int32 total = 1;
+}
+
+service ExampleService {
+  // Unary.
+  rpc Echo(EchoRequest) returns (EchoResponse);
+
+  // Server streaming: one request, N responses.
+  rpc EchoStream(EchoRequest) returns (stream EchoResponse);
+
+  // Client streaming: N requests, one response.
+  rpc SumStream(stream SumRequest) returns (SumResponse);
+
+  // Bidirectional streaming.
+  rpc EchoBidi(stream EchoRequest) returns (stream EchoResponse);
+}
