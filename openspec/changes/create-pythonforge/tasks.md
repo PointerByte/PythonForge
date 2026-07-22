@@ -56,5 +56,5 @@
 - [x] 8.1 Escribir README en español e inglés, referencia de configuración y ejemplos. (docs/{configuration,http,grpc,security,background-work,observability} en `.md` y `.es.md`)
 - [x] 8.2 Alcanzar >=85 % de cobertura y aprobar lint, tipado y análisis de seguridad. (260 tests, 88.77 % de cobertura; ruff/mypy/bandit/pip-audit en verde)
 - [x] 8.3 Construir wheel/sdist y probar el wheel en una `.venv` limpia. (twine check OK; verificado que la instalación base no arrastra grpcio/boto3/azure/gcp/otel/cryptography/typer)
-- [x] 8.4 Configurar CI y publicación PyPI con Trusted Publishing. (`.github/workflows/{ci,publish}.yml`; publish es manual por workflow_dispatch. OJO: `.github/` está en .gitignore, hay que quitarlo para que CI exista en el repo)
+- [x] 8.4 Configurar CI y publicación PyPI con Trusted Publishing. (`.github/workflows/{ci,publish}.yml` ya trackeados; publish es manual por workflow_dispatch. Resuelto: se quitó `.github/` del .gitignore y se commitearon los workflows — commit 654b1c3)
 - [ ] 8.5 Ejecutar el checklist de `push.txt`, etiquetar y publicar `0.1.0`.

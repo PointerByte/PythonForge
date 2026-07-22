@@ -9,14 +9,12 @@ __pycache__/
 *.pyo
 .env
 .dockerignore
-.github/
 .vscode/
 .idea/
 .ruff_cache/
 .coverage
 .coverage_old
 .cache/
-.typing/
 .pytest_cache/
 .mypy_cache/
 push.txt
